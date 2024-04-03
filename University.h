@@ -2,10 +2,12 @@
 #include<iostream>
 #include<algorithm>
 
+using namespace std;
+
 class University {
     private:
         Student **studentList;
-        std::string uniName;
+        string uniName;
         int studentListCapacity;
         int studentListCounter;
 
@@ -40,11 +42,11 @@ class University {
             // std::cout << "University delete completely\n";
         }
 
-        std::string const getUniName() {
+        string const getUniName() {
             return this->uniName;
         }
 
-        void setUniName(std::string name) {
+        void setUniName(string name) {
             this->uniName = name;
         }
 
@@ -100,15 +102,15 @@ class University {
 
         bool displayStudent() {
             if(!studentListCounter || !studentList) {
-                std::cout << "Danh sach sinh vien rong\n";
+                cout << "Danh sach sinh vien rong\n";
                 return false;
             }
             
-            std::sort(studentList, studentList + studentListCounter, University::scoreCompare);
+            sort(studentList, studentList + studentListCounter, University::scoreCompare);
 
-            std::cout << "Cac sinh vien co ten trong danh sach la\n";
+            cout << "Cac sinh vien co ten trong danh sach la\n";
 
-            for(int i = 0; i < studentListCounter; i++) std::cout << i+1 << ". " << studentList[i]->getName() << " " << studentList[i]->getScore() << " " << studentList[i]->getType() << std::endl; 
+            for(int i = 0; i < studentListCounter; i++) cout << i+1 << ". " << studentList[i]->getName() << " " << studentList[i]->getScore() << " " << studentList[i]->getType() <<endl; 
 
             return true;
         }
@@ -122,12 +124,33 @@ class University {
             for(int i = 0; i < studentListCounter; i++) 
                 if(max < studentList[i]->getScore()) max = studentList[i]->getScore();
 
-            std::cout << "Cac sinh vien co thanh tich tot nhat la:\n";
+                cout << "Cac sinh vien co thanh tich tot nhat la:\n";
 
             for(int i = 0; i < studentListCounter; i++) {
-                if(studentList[i]->getScore() == max) std::cout << order++ << ". " << studentList[i]->getName() << " " << studentList[i]->getScore() << std::endl;
+                if(studentList[i]->getScore() == max) cout << order++ << ". " << studentList[i]->getName() << " " << studentList[i]->getScore() << endl;
             }  
 
             return true;
+        }
+
+        void DoAssignmentsForAllStudents() {
+            cout << "Doing assignments for all students:\n";
+            for (int i = 0; i < studentListCounter; ++i) {
+                studentList[i]->DoAssignment();
+            }
+        }
+
+        void TakeTestsForAllStudents() {
+            cout << "Taking tests for all students:\n";
+            for (int i = 0; i < studentListCounter; ++i) {
+                studentList[i]->TakeTest();
+            }
+        }
+
+        void TakeExamsForAllStudents() {
+            cout << "Taking exams for all students:\n";
+            for (int i = 0; i < studentListCounter; ++i) {
+                studentList[i]->TakeExam();
+            }
         }
 };

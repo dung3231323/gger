@@ -1,4 +1,7 @@
 #include<string>
+#include <iostream>
+
+using namespace std;
 
 struct Semesters {
     int assignments;
@@ -72,7 +75,9 @@ class Student {
         void setScore(int score) {
             this->score = score;
         }
-        
+        virtual void DoAssignment() = 0;
+        virtual void TakeTest() = 0;
+        virtual void TakeExam() = 0;
 };
 
 class UniStudents : public Student {
@@ -94,6 +99,26 @@ class UniStudents : public Student {
 
         ~UniStudents() {
             delete[] semesters;
+        }
+        void DoAssignment() override {
+            // Gán điểm ngẫu nhiên cho bài tập cho sinh viên đại học
+            srand(time(NULL));
+            int randomScore = rand() % 101; // Điểm từ 0 đến 100
+            cout << "UniStudent " << name << " - Assignment Score: " << randomScore << endl;
+        }
+
+        void TakeTest() override {
+            // Gán điểm ngẫu nhiên cho bài kiểm tra cho sinh viên đại học
+            srand(time(NULL));
+            int randomScore = rand() % 101; // Điểm từ 0 đến 100
+            cout << "UniStudent " << name << " - Test Score: " << randomScore << endl;
+        }
+
+        void TakeExam() override {
+            // Gán điểm ngẫu nhiên cho kỳ thi cho sinh viên đại học
+            srand(time(NULL));
+            int randomScore = rand() % 101; // Điểm từ 0 đến 100
+            cout << "UniStudent " << name << " - Exam Score: " << randomScore << endl;
         }
 };
 
@@ -117,5 +142,25 @@ class CollegeStudents : public Student {
 
         ~CollegeStudents() {
             delete[] semesters;
+        }
+        void DoAssignment() override {
+            // Gán điểm ngẫu nhiên cho bài tập cho sinh viên cao đẳng
+            srand(time(NULL));
+            int randomScore = rand() % 101; // Điểm từ 0 đến 100
+            cout << "CollegeStudent " << name << " - Assignment Score: " << randomScore << endl;
+        }
+
+        void TakeTest() override {
+            // Gán điểm ngẫu nhiên cho bài kiểm tra cho sinh viên cao đẳng
+            srand(time(NULL));
+            int randomScore = rand() % 101; // Điểm từ 0 đến 100
+            cout << "CollegeStudent " << name << " - Test Score: " << randomScore << endl;
+        }
+
+        void TakeExam() override {
+            // Gán điểm ngẫu nhiên cho kỳ thi cho sinh viên cao đẳng
+            srand(time(NULL));
+            int randomScore = rand() % 101; // Điểm từ 0 đến 100
+            cout << "CollegeStudent " << name << " - Exam Score: " << randomScore << endl;
         }
 };
